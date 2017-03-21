@@ -16,7 +16,7 @@ hbs.registerHelper('getCurrentYear', () => {
 app.use((req, res, next)=>{
   var now = new Date().toString();
   var log = `${now} :${req.method} ${req.url}`;
-  console.log(log);
+  //console.log(log);
 
   fs.appendFile('server.log', log + '\n');
   next();
@@ -45,10 +45,18 @@ app.get('/about', (req, res) =>{
   });
 });
 
+app.get('/projects', (req, res) => {
+  res.render('projects.hbs', {
+    pageTitle: 'Projects'
+  });
+});
+
 app.get('/bad', (req, res) => {
   res.send({
     errorMessage :'Unable to handle request'
   });
 });
 
-app.listen(port , () => {console.log(`Server start in port ${port}`);});
+app.listen(port, () => {
+  console.log(`Server start in port ${port}`);
+});
